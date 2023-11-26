@@ -22,20 +22,49 @@ class CartController extends Controller
         ]);
 
 
-        return redirect()->back()->with('success', 'Product added to cart successfully.');
+        return redirect()->back()->with('success', 'Proizvod je dodat u korpu uspešno.');
     }
 
     public function showCart()
     {
         // Retrieve cart items
         $cartItems = Cart::content();
+        $totalQuantity = 0;
 
-        return view('cart.index', compact('cartItems'));
+        foreach ($cartItems as $item) {
+            $totalQuantity = $totalQuantity + $item->qty;
+        }
+
+        return view('cart.index', compact('cartItems', 'totalQuantity'));
     }
 
     public function removeItem($rowId)
     {
         Cart::remove($rowId);
-        return redirect()->route('cart.show')->with('success', 'Item removed from the cart.');
+        return redirect()->route('cart.show')->with('success', 'Proizvod je uklonjen iz korpe.');
+    }
+
+    public function increaseOne($rowId)
+    {
+        $item = Cart::get($rowId);
+
+        if (!$item) {
+            return redirect()->route('cart.show')->with('error', 'Proizvod nije pronadjen u korpi.');
+        }
+
+        Cart::update($rowId, $item->qty + 1);
+        return redirect()->route('cart.show')->with('success', "Količina proizvoda {$item->name} je uvećana za 1.");
+    }
+
+    public function reduceOne($rowId)
+    {
+        $item = Cart::get($rowId);
+
+        if (!$item) {
+            return redirect()->route('cart.show')->with('error', 'Proizvod nije pronadjen u korpi.');
+        }
+
+        Cart::update($rowId, $item->qty - 1);       
+        return redirect()->route('cart.show')->with('success', "Količina proizvoda {$item->name} je umanjena za 1.");
     }
 }
