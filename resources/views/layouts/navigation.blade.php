@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('products.index') }}">
                         <img class="object-cover w-auto fill-current " src="{{ asset('storage/logo_builtt_veci.png') }}" alt="logo">
                     </a>
                 </div>
@@ -52,7 +52,7 @@
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M12.6284 1.66896L14.8815 4.17236L17.6315 7.17234L18.3687 6.49662L15.6202 3.49832L13.3717 1L12.6284 1.66896Z" fill="black"/>
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M0 6.33449L3 21.3345H20L23 6.33449H0ZM1.2198 7.33449L3.8198 20.3345H19.1802L21.7802 7.33449H1.2198Z" fill="black"/>
                             <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" fill="black" font-size="12">
-                                {{ Cart::content()->count() }}
+                                {{ Cart::count() }}
                             </text>
                         </svg>                  
                     </x-nav-link>

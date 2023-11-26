@@ -21,25 +21,30 @@
                                     <img src="" alt="{{ $item->name }}" class="w-16 h-16 object-cover mr-4">
                                     <div class="w-2/3">
                                         <h2 class="text-lg font-semibold">{{ $item->name }}</h2>
-                                        <p>{{ $item->qty }}</p>
                                         <div class="flex"> 
-                                            <button class="px-2 py-2 bg-white text-gray-700 border-black rounded-l-2xl focus:outline-none" onclick="decrementCounter(this)">
-                                                <!-- Minus Icon -->
-                                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M20 12H4"></path>
-                                                </svg>
-                                            </button>
-                                            <span id="counter" class="bg-white px-2 py-1  text-gray-700">1</span>
-                                            <button class="px-2 py-2 bg-white text-gray-700 border-black rounded-r-2xl focus:outline-none" onclick="incrementCounter(this)">
-                                                <!-- Plus Icon -->
-                                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                                </svg>
-                                            </button>
+                                            <form action="{{ route('cart.reduce', ['rowId' => $item->rowId]) }}" method="post">
+                                                @csrf
+                                                <button class="px-2 py-2 bg-white text-gray-700 border-black rounded-l-2xl focus:outline-none" onclick="decrementCounter(this)">
+                                                    <!-- Minus Icon -->
+                                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M20 12H4"></path>
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                            <span id="counter" class="bg-white px-2 py-1  text-gray-700">{{ $item->qty }}</span>
+                                            <form action="{{ route('cart.increase', ['rowId' => $item->rowId]) }}" method="post">
+                                                @csrf
+                                                <button class="px-2 py-2 bg-white text-gray-700 border-black rounded-r-2xl focus:outline-none" onclick="incrementCounter(this)">
+                                                    <!-- Plus Icon -->
+                                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                                    </svg>
+                                                </button>
+                                            </form>
                                             <form action="{{ route('cart.remove', ['rowId' => $item->rowId]) }}" method="post">
                                                 @csrf
                                                 @method('delete')
@@ -99,3 +104,17 @@
         </div>
     </div>
 </x-app-layout>
+<script>
+    function incrementCounter(button) {
+        var counterElement = button.parentNode.querySelector("#counter");
+        counterElement.textContent = parseInt(counterElement.textContent) + 1;
+    }
+
+    function decrementCounter(button) {
+        var counterElement = button.parentNode.querySelector("#counter");
+        var currentCount = parseInt(counterElement.textContent);
+        if (currentCount > 1) {
+            counterElement.textContent = currentCount - 1;
+        }
+    }
+</script>
