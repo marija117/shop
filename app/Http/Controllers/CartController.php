@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product; 
-use Cart;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
 {
@@ -14,11 +14,12 @@ class CartController extends Controller
             'id' => $product->id,
             'name' => $product->name,
             'price' => $product->price,
-            'quantity' => 1,
+            'qty' => 1,
             'attributes' => [
                 'size' => $product->size,
             ],
         ]);
+
 
         return redirect()->back()->with('success', 'Product added to cart successfully.');
     }

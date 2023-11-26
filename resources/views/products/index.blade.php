@@ -31,9 +31,13 @@
                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                             </svg>
                         </button>
-                        <button class="absolute bottom-3 left-24 p-1 bg-black text-white rounded-full">
-                            <img src="{{ asset('storage/cart.png') }}" alt="cart">
-                        </button>
+                        <form action="{{ route('cart.add', ['product' => $product->id]) }}" method="post">
+                            @csrf
+                            <button type="submit" class="absolute bottom-3 left-24 p-1 bg-black text-white rounded-full">
+                                <img src="{{ asset('storage/cart.png') }}" alt="cart">
+                            </button>
+                        </form>
+
                     </div>
                     <div class="px-6 py-4">
                         <div class="font-bold text-l mb-2">{{ $product->name }}</div>
@@ -41,6 +45,12 @@
                     </div>
                 </div>
             @endforeach
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
         </div>
     </div>
 
