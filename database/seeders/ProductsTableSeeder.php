@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
 class ProductsTableSeeder extends Seeder
@@ -21,7 +22,7 @@ class ProductsTableSeeder extends Seeder
                 'size' => '750g',
                 'price' => 746,
                 'discounted_price' => 546,
-                'image' => 'product1.jpg',
+                'image' => Storage::url('public/product1.png'),
             ],
             [
                 'name' => 'Naturela sa Rogačem i Agava Šećerom',
@@ -29,7 +30,7 @@ class ProductsTableSeeder extends Seeder
                 'size' => '750g',
                 'price' => 746,
                 'discounted_price' => 546,
-                'image' => 'product1.jpg',
+                'image' => Storage::url('public/product1.png'),
             ],
             [
                 'name' => 'Naturela sa Rogačem i Agava Šećerom',
@@ -37,7 +38,7 @@ class ProductsTableSeeder extends Seeder
                 'size' => '750g',
                 'price' => 746,
                 'discounted_price' => 546,
-                'image' => 'product1.jpg',
+                'image' => Storage::url('public/product2.png'),
             ],
             [
                 'name' => 'Naturela sa Rogačem i Agava Šećerom',
@@ -45,7 +46,7 @@ class ProductsTableSeeder extends Seeder
                 'size' => '750g',
                 'price' => 746,
                 'discounted_price' => 546,
-                'image' => 'product1.jpg',
+                'image' => Storage::url('public/product3.png'),
             ],
             [
                 'name' => 'Naturela sa Rogačem i Agava Šećerom',
@@ -53,7 +54,7 @@ class ProductsTableSeeder extends Seeder
                 'size' => '750g',
                 'price' => 746,
                 'discounted_price' => 546,
-                'image' => 'product1.jpg',
+                'image' => Storage::url('public/product4.png'),
             ],
             [
                 'name' => 'Naturela sa Rogačem i Agava Šećerom',
@@ -61,7 +62,7 @@ class ProductsTableSeeder extends Seeder
                 'size' => '750g',
                 'price' => 746,
                 'discounted_price' => 546,
-                'image' => 'product1.jpg',
+                'image' => Storage::url('public/product2.png'),
             ],
             [
                 'name' => 'Naturela sa Rogačem i Agava Šećerom',
@@ -69,7 +70,7 @@ class ProductsTableSeeder extends Seeder
                 'size' => '750g',
                 'price' => 746,
                 'discounted_price' => 546,
-                'image' => 'product1.jpg',
+                'image' => Storage::url('public/product1.png'),
             ],
             [
                 'name' => 'Naturela sa Rogačem i Agava Šećerom',
@@ -77,7 +78,7 @@ class ProductsTableSeeder extends Seeder
                 'size' => '750g',
                 'price' => 746,
                 'discounted_price' => 546,
-                'image' => 'product1.jpg',
+                'image' => Storage::url('public/product3.png'),
             ],
             [
                 'name' => 'Naturela sa Rogačem i Agava Šećerom',
@@ -85,7 +86,7 @@ class ProductsTableSeeder extends Seeder
                 'size' => '750g',
                 'price' => 746,
                 'discounted_price' => 546,
-                'image' => 'product1.jpg',
+                'image' => Storage::url('public/product4.png'),
             ],
         ];
         DB::table('products')->insert($products);
