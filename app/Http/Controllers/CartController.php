@@ -17,10 +17,25 @@ class CartController extends Controller
             'qty' => 1,
             'attributes' => [
                 'size' => $product->size,
+                'image' => $product->image,
             ],
         ]);
 
 
         return redirect()->back()->with('success', 'Product added to cart successfully.');
+    }
+
+    public function showCart()
+    {
+        // Retrieve cart items
+        $cartItems = Cart::content();
+
+        return view('cart.index', compact('cartItems'));
+    }
+
+    public function removeItem($rowId)
+    {
+        Cart::remove($rowId);
+        return redirect()->route('cart.show')->with('success', 'Item removed from the cart.');
     }
 }

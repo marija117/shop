@@ -28,7 +28,8 @@ Route::get('/products', [ProductController::class, 'index'])
 ->middleware(['auth', 'verified'])->name('products.index');
 
 Route::post('/cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
-
+Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
+Route::delete('/cart/remove/{rowId}', [CartController::class, 'removeItem'])->name('cart.remove');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
