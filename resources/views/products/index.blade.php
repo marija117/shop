@@ -17,6 +17,10 @@
                             @if($product->discounted_price)
                                 <p class="card-text">Discounted Price: ${{ $product->discounted_price }}</p>
                             @endif
+                            <form action="{{ route('cart.add', ['product' => $product->id]) }}" method="post">
+                                @csrf
+                                <button type="submit" class="btn btn-primary">Add to Cart</button>
+                            </form>
                         </div>
                     </div>
                 </div>
