@@ -37,10 +37,17 @@ class CartController extends Controller
         foreach ($cartItems as $item) {
             $totalQuantity = $totalQuantity + $item->qty;
         }
+
         $manualTotal = $cartItems->sum(function ($item) {
             return $item->price * $item->qty;
         });
-        return view('cart.index', compact('cartItems', 'manualTotal'));
+
+        $manualDisountedTotal = $cartItems->sum(function ($item) {
+            return $item->options->discounted_price * $item->qty;
+        });
+
+        $savingAmount = $manualTotal - $manualDisountedTotal;
+        return view('cart.index', compact('cartItems', 'manualTotal', 'manualDisountedTotal', 'savingAmount'));
     }
 
     public function removeItem($rowId)

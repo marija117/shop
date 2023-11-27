@@ -23,7 +23,7 @@
                                         <h2 class="text-lg font-semibold">{{ $item->name }}</h2>
                                         <p class="text-sm">{{ $item->options->size  }}</p>
 
-                                        <div class="flex"> 
+                                        <div class="flex pt-4"> 
                                             <form action="{{ route('cart.reduce', ['rowId' => $item->rowId]) }}" method="post">
                                                 @csrf
                                                 <button class="px-2 py-2 bg-white text-gray-700 border-black rounded-l-2xl focus:outline-none" onclick="decrementCounter(this)">
@@ -82,7 +82,7 @@
                         </div>
                         <div class="w-1/2">
                             <p class="text-l text-right py-2">{{ $manualTotal }} RSD</p>
-                            <p class="text-right py-2">-</p>
+                            <p class="text-right py-2">-{{ $savingAmount }} RSD </p>
                             <p class="text-xs text-right py-2">Besplatno</p>
                         </div>
                     </div>
@@ -92,7 +92,7 @@
                             <p class="text-xs py-2">Cena je sa uključenim PDV-om</p>
                         </div>
                         <div class="w-1/2">
-                            <p class="text-l text-right py-2">{{ $manualTotal }} RSD</p>
+                            <p class="text-l text-right py-2">{{ $manualDisountedTotal }} RSD</p>
                             <p class="text-right py-2"></p>
                         </div>
                     </div>
