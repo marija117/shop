@@ -27,11 +27,11 @@ Route::get('/dashboard', function () {
 Route::get('/products', [ProductController::class, 'index'])
 ->middleware(['auth', 'verified'])->name('products.index');
 
-Route::post('/cart/add/{product}', [CartController::class, 'addToCart'])->name('cart.add');
-Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
-Route::delete('/cart/remove/{rowId}', [CartController::class, 'removeItem'])->name('cart.remove');
-Route::post('/cart/increase/{rowId}', [CartController::class, 'increaseOne'])->name('cart.increase');
-Route::post('/cart/reduce/{rowId}', [CartController::class, 'reduceOne'])->name('cart.reduce');
+Route::post('/cart/add/{product}', [CartController::class, 'addToCart'])->middleware(['auth', 'verified'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'showCart'])->middleware(['auth', 'verified'])->name('cart.show');
+Route::delete('/cart/remove/{rowId}', [CartController::class, 'removeItem'])->middleware(['auth', 'verified'])->name('cart.remove');
+Route::post('/cart/increase/{rowId}', [CartController::class, 'increaseOne'])->middleware(['auth', 'verified'])->name('cart.increase');
+Route::post('/cart/reduce/{rowId}', [CartController::class, 'reduceOne'])->middleware(['auth', 'verified'])->name('cart.reduce');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
