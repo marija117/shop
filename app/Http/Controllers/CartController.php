@@ -5,19 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product; 
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Storage;
 
 class CartController extends Controller
 {
     public function addToCart(Request $request, Product $product)
     {
+        $quantity = $request->input('quantity');
         Cart::add([
             'id' => $product->id,
             'name' => $product->name,
             'price' => $product->price,
-            'qty' => 1,
-            'attributes' => [
+            'size' => $product->size,
+                'image' => Storage::url('public/product1.png'),
+                'discounted_price' => $product->price,
+            'qty' => $quantity,
+            [
                 'size' => $product->size,
                 'image' => $product->image,
+                'discounted_price' => $product->price,
             ],
         ]);
 
@@ -34,8 +40,10 @@ class CartController extends Controller
         foreach ($cartItems as $item) {
             $totalQuantity = $totalQuantity + $item->qty;
         }
-
-        return view('cart.index', compact('cartItems', 'totalQuantity'));
+        $manualTotal = $cartItems->sum(function ($item) {
+            return $item->price * $item->qty;
+        });
+        return view('cart.index', compact('cartItems', 'manualTotal'));
     }
 
     public function removeItem($rowId)

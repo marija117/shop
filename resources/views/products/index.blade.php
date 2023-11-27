@@ -22,7 +22,7 @@
                                     d="M20 12H4"></path>
                             </svg>
                         </button>
-                        <span id="counter" class="absolute bottom-2 left-10 bg-white px-2 py-1  text-gray-700">1</span>
+                        <span id="quantity" name="quantity" class="absolute bottom-2 left-10 bg-white px-2 py-1  text-gray-700">1</span>
                         <button class="absolute bottom-2 left-14 px-2 py-2 bg-white text-gray-700 rounded-r-2xl focus:outline-none" onclick="incrementCounter(this)">
                             <!-- Plus Icon -->
                             <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -33,6 +33,8 @@
                         </button>
                         <form action="{{ route('cart.add', ['product' => $product->id]) }}" method="post">
                             @csrf
+                            
+                            <input type="hidden" name="quantity" id="quantityInput" value="">
                             <button type="submit" class="absolute bottom-3 left-24 p-1 bg-black text-white rounded-full">
                                 <img src="{{ asset('storage/cart.png') }}" alt="cart">
                             </button>
@@ -57,15 +59,21 @@
 </x-app-layout>
 <script>
     function incrementCounter(button) {
-        var counterElement = button.parentNode.querySelector("#counter");
+        var counterElement = button.parentNode.querySelector("#quantity");
+        var currentCount = parseInt(counterElement.textContent);
+
         counterElement.textContent = parseInt(counterElement.textContent) + 1;
+        button.parentNode.querySelector("#quantityInput").value = currentCount + 1;
+
     }
 
     function decrementCounter(button) {
-        var counterElement = button.parentNode.querySelector("#counter");
+        var counterElement = button.parentNode.querySelector("#quantity");
         var currentCount = parseInt(counterElement.textContent);
         if (currentCount > 1) {
             counterElement.textContent = currentCount - 1;
+            button.parentNode.querySelector("#quantityInput").value = currentCount - 1;
+
         }
     }
 </script>
