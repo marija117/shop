@@ -34,7 +34,7 @@
                         <form action="{{ route('cart.add', ['product' => $product->id]) }}" method="post">
                             @csrf
                             
-                            <input type="hidden" name="quantity" id="quantityInput" value="">
+                            <input type="hidden" name="quantity" id="quantityInput" value="1">
                             <button type="submit" class="absolute bottom-3 left-24 p-1 bg-black text-white rounded-full">
                                 <img src="{{ asset('storage/cart.png') }}" alt="cart">
                             </button>

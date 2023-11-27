@@ -18,9 +18,11 @@
                         <div class="flex justify-between">
                             <div class="w-2/3">
                                 <div class="flex">
-                                    <img src="" alt="{{ $item->name }}" class="w-16 h-16 object-cover mr-4">
+                                    <img src="{{ asset($item->options->image) }}" alt="{{ $item->name }}" class="w-24 h-24 object-cover mr-4">
                                     <div class="w-2/3">
                                         <h2 class="text-lg font-semibold">{{ $item->name }}</h2>
+                                        <p class="text-sm">{{ $item->options->size  }}</p>
+
                                         <div class="flex"> 
                                             <form action="{{ route('cart.reduce', ['rowId' => $item->rowId]) }}" method="post">
                                                 @csrf
@@ -56,7 +58,7 @@
                             </div>
                             <div class="">
                                 <p class="text-gray-500">{{ $item->price }} RSD</p>
-                                <p class="text-red-500 text-xs line-through">{{ $item->price }} RSD</p>
+                                <p class="text-red-500 text-xs line-through">{{ $item->options->discounted_price }} RSD</p>
                             </div>
                         </div>
                     </div>
@@ -79,7 +81,7 @@
                             <p class="py-2">Isporuka Daily Express*</p>
                         </div>
                         <div class="w-1/2">
-                            <p class="text-l text-right py-2">{{ Cart::total() }} RSD</p>
+                            <p class="text-l text-right py-2">{{ $manualTotal }} RSD</p>
                             <p class="text-right py-2">-</p>
                             <p class="text-xs text-right py-2">Besplatno</p>
                         </div>
@@ -90,7 +92,7 @@
                             <p class="text-xs py-2">Cena je sa uključenim PDV-om</p>
                         </div>
                         <div class="w-1/2">
-                            <p class="text-l text-right py-2">{{ Cart::total() }} RSD</p>
+                            <p class="text-l text-right py-2">{{ $manualTotal }} RSD</p>
                             <p class="text-right py-2"></p>
                         </div>
                     </div>

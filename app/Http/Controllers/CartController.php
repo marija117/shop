@@ -16,14 +16,11 @@ class CartController extends Controller
             'id' => $product->id,
             'name' => $product->name,
             'price' => $product->price,
-            'size' => $product->size,
-                'image' => Storage::url('public/product1.png'),
-                'discounted_price' => $product->price,
             'qty' => $quantity,
-            [
+            'options' => [
                 'size' => $product->size,
                 'image' => $product->image,
-                'discounted_price' => $product->price,
+                'discounted_price' => $product->discounted_price,
             ],
         ]);
 
