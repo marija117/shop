@@ -1,10 +1,6 @@
 ## Project Setup 
 
 To be able to run this project you will need to install few things
-# If you are using macbook
-```bash
-# install php
-brew install php
 
 # If you are using macbook
 ```bash
